@@ -1,0 +1,29 @@
+{
+
+  "name":           "wilmoore/props",
+  "description":    "Provides property accessors for PHP objects; allows input validation/transformation, defaults, change tracking, and JSON serialization of object properties.",
+  "keywords":       ["properties", "attributes", "accessor", "validation", "defaults", "changetracking"],
+  "homepage":       "http://wilmoore.github.com/props",
+  "license":        "MIT",
+
+  "authors": [
+    {
+      "name":       "Wil Moore III",
+      "email":      "wil.moore@wilmoore.com"
+    }
+  ],
+
+  "require": {
+    "php":          ">=5.4.0"
+  },
+
+  "require-dev": {
+    "eher/phpunit": ">=1.6"
+  },
+
+  "autoload": {
+    "psr-0":        { "Meta": "src/main/" }
+  }
+
+}
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         mapTestClassNameToCoveredClassName="true"
+         processIsolation="false"
+         stopOnFailure="true"
+         strict="true"
+         syntaxCheck="false"
+         verbose="true"
+>
+    <groups>
+      <exclude>
+        <group>skiptest</group>
+      </exclude>
+    </groups>
+
+    <testsuites>
+        <testsuite name="Unit Test Suite">
+					<directory>./src/test/unit/Meta/</directory>
+        </testsuite>
+        <testsuite name="Spec Test Suite">
+					<directory>./src/test/spec/Meta/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
