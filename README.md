@@ -46,14 +46,10 @@ Usage Examples
 ------------------------------
 
 	class Post {
-		protected $__attributes = [
-			'id' => [], 'title' => [], 'body'  => []
-		];
+		protected $__attributes = [ 'id' => [], 'title' => [], 'body'  => [] ];
 	}
 
 	$post = new Post(['title' => 'Cool Story...', 'body' => '<div>Yeah, Sure.</div>']);
-
-	echo $post;
 
 
 Download and Installation
