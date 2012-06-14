@@ -63,16 +63,16 @@ Download and Installation
 
 composer.json:
 
-		{
-			"require": {
-					"metaphp/attributes": "dev-master"
-			}
+	{
+		"require": {
+				"metaphp/attributes": "dev-master"
 		}
+	}
 
 run composer:
 
-		$ curl -s http://getcomposer.org/installer | php
-		$ composer.phar install
+	$ curl -s http://getcomposer.org/installer | php
+	$ composer.phar install
 
 
 FAQ
