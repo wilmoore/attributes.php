@@ -1,6 +1,9 @@
 PHP object attributes without the setter, getter boilerplate
 ============================================================
 
+Because...
+------------------------------
+
 - 	You shouldn't have to write or generate getter, setter boilerplate.
 
 - 	Your PHP shouldn't look like [Java Beans](http://youtu.be/LH75sJAR0hc).
