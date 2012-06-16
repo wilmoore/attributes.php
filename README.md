@@ -76,41 +76,28 @@ run composer:
 	$ composer.phar install
 
 
-FAQ
-------------------------------
-
-**Why do I need this?**
-
-Compare [this](https://gist.github.com/):
-
-    $...
-
-To [this](https://gist.github.com/):
-
-    $...
-
-
-Troubleshooting
-------------------------------
-
-**...**
-
--   ...
-
-
 Alternatives
 ------------------------------
 
--   []()
+-   [Ruby](http://ruby-lang.org/)
+-   [Scala](http://scala-lang.org/)
 
 
 Inspiration
 ------------------------------
 
--   []()
+-   [Virtus](https://github.com/solnic/virtus)
+-   [Smart Properties](https://github.com/t6d/smart_properties)
+-   [C# Properties](http://msdn.microsoft.com/en-us/library/x9fsa0sw)
+-   [BackboneJs Model Attributes](http://backbonejs.org/#Model-attributes)
+-   [YUI3: Attribute](http://yuilibrary.com/yui/docs/attribute/index.html)
+
 
 Contributors
 ------------------------------
+
+	 authors: 
+			 9	Wil Moore III           100.0%
 
 
 LICENSE
