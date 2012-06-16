@@ -5,9 +5,11 @@ Because...
 ------------------------------
 
 - 	You shouldn't (by default) write or generate setter/getter method boilerplate.
-- 	PHP shouldn't borrow the [Beans](http://youtu.be/LH75sJAR0hc) pattern from Java.
+- 	PHP shouldn't borrow the [Bean](http://youtu.be/LH75sJAR0hc) pattern from Java.
 - 	You shouldn't _have_ rely on your [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words)
 		(no matter how good it is) for simple `attribute` **access** and **mutation**.
+- 	Magic method (`__get`, `__set`) is a kludge.
+- 	The common base object pattern is a kludge.
 
 
 Features
