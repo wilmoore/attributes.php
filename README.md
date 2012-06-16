@@ -96,6 +96,8 @@ Inspiration
 Contributors
 ------------------------------
 
+[contributor](https://github.com/metaphp/attributes/contributors) info:
+
 	 authors: 
 			 9	Wil Moore III           100.0%
 
