@@ -4,10 +4,8 @@ PHP object attributes without the setter, getter boilerplate
 Because...
 ------------------------------
 
-- 	You shouldn't have to write or generate getter, setter boilerplate.
-
-- 	Your PHP shouldn't look like [Java Beans](http://youtu.be/LH75sJAR0hc).
-
+- 	You shouldn't (by default) write or generate setter/getter method boilerplate.
+- 	PHP shouldn't borrow the [Beans](http://youtu.be/LH75sJAR0hc) pattern from Java.
 - 	You shouldn't _have_ rely on your [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words)
 		(no matter how good it is) for simple `attribute` **access** and **mutation**.
 
