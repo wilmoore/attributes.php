@@ -1,5 +1,5 @@
-attributes: PHP object attributes without the setter, getter boilerplate
-================================================================================
+PHP object attributes without the setter, getter boilerplate
+============================================================
 
 Rationale
 ------------------------------
