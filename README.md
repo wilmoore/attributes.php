@@ -1,9 +1,5 @@
-attributes: Plain object attributes for the rest of us
-============================================================
-
-
-Free your plain PHP objects from the setter and getter boilerplate.
-
+attributes: PHP object attributes without the setter, getter boilerplate
+================================================================================
 
 Rationale
 ------------------------------
