@@ -9,7 +9,7 @@ namespace Test\Unit\Meta\Attributes;
       use PHPUnit_Framework_TestCase as TestCase;
       use Meta\Attributes;
 
-class HasTest extends TestCase {
+class SetTest extends TestCase {
 
   /**
    * Attribute Configuration - data provider
@@ -21,10 +21,13 @@ class HasTest extends TestCase {
    *
    * @return  array
    */
-  public function provider_attributes_configuration() {
-    $data[] = [ false, 'email', [] ];
-    $data[] = [ true,  'email', ['email' => []] ];
-    $data[] = [ true,  'email', ['email' => ['value' => 'metaphp@example.com']] ];
+  function provider_attributes_configuration() {
+    $data[] = [ true, 	'employed', 		['employed' => []] ];
+    $data[] = [ false, 	'married', 			['married' 	=> []] ];
+
+    $data[] = [ 35, 		'age', 					['age' 			=> []] ];
+    $data[] = [ 3, 			'children', 		['children' => []] ];
+    $data[] = [ 0, 			'pets', 				['pets' 		=> []] ];
 
     return $this->instance_wrapper($data);
   }
@@ -38,7 +41,7 @@ class HasTest extends TestCase {
    *
    * @return  array
    */
-  public function instance_wrapper($data) {
+  function instance_wrapper($data) {
     return array_map(function($parameters){
       $attributes   = $parameters[count($parameters)-1];
       $instance     = $this->getObjectForTrait('Meta\Attributes');
@@ -56,8 +59,9 @@ class HasTest extends TestCase {
    * @test
    * @dataProvider provider_attributes_configuration
    */
-  public function Has_Expected_Attributes($expected, $attribute, $config, $instance) {
-    $this->assertSame($expected, $instance->has($attribute));
+  function Can_Set_Value($expected, $attribute, $config, $instance) {
+		$instance->set($attribute, $expected);
+    $this->assertEquals($expected, $instance->get($attribute));
   }
 
 }

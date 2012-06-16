@@ -1,4 +1,4 @@
 all: test
 
 test:
-	vendor/bin/phpunit
+	vendor/bin/phpunit --verbose --testdox

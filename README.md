@@ -2,13 +2,15 @@ attributes: Plain object attributes for the rest of us
 ============================================================
 
 
-If you are tired of writing or generating getter-setter boilerplate, and you deploy PHP 5.4+, then `attributes` is for you.
+Free your plain PHP objects from the setter and getter boilerplate.
 
 
 Rationale
 ------------------------------
 
-- 	Writing [Java Beans](http://youtu.be/LH75sJAR0hc) in PHP is not fun nor is it productive.
+- 	You shouldn't have to write or generate getter, setter boilerplate.
+
+- 	Your PHP shouldn't look like [Java Beans](http://youtu.be/LH75sJAR0hc).
 
 - 	You shouldn't _have_ rely on your [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words)
 		(no matter how good it is) for simple `attribute` **access** and **mutation**.
@@ -45,11 +47,14 @@ Features
 Usage Examples
 ------------------------------
 
-	class Post {
-		protected $__attributes = [ 'id' => [], 'title' => [], 'body'  => [] ];
+	class Person {
+		use Meta\Attributes;
+		protected $__attributes = ['firstName' => [], 'lastName'  => []];
 	}
 
-	$post = new Post(['title' => 'Cool Story...', 'body' => '<div>Yeah, Sure.</div>']);
+	$person = new Person;
+	$person.set('firstName', 'Senae');
+	$person.set('lastName',  'Moore');
 
 
 Download and Installation

@@ -15,11 +15,9 @@
           verbose="true"
 >
 
-  <groups>
-    <exclude>
-      <group>skiptest</group>
-    </exclude>
-  </groups>
+  <!-- ======================================================================================== -->
+  <!-- test suite(s)                                                                            -->
+  <!-- ======================================================================================== -->
 
   <testsuites>
     <testsuite name="Unit Test Suite">
@@ -29,5 +27,35 @@
       <directory>./src/test/spec/Meta/</directory>
     </testsuite>
   </testsuites>
+
+  <!-- ======================================================================================== -->
+  <!-- code coverage reporting (whitelist/blacklist)                                            -->
+  <!-- ======================================================================================== -->
+
+  <filter>
+    <whitelist addUncoveredFilesFromWhitelist="true">
+      <directory suffix="Test.php">./src/test/unit/Meta</directory>
+    </whitelist>
+  </filter>
+
+  <!-- ======================================================================================== -->
+  <!-- Selects tests that should (or should not) be run based on the test's @group annotation   -->
+  <!-- ======================================================================================== -->
+
+  <groups>
+    <!-- tests with these @group annotations will be excluded from running with the suite -->
+    <exclude>
+      <group>disable</group>
+      <group>skip</group>
+    </exclude>
+  </groups>
+
+  <!-- ======================================================================================== -->
+  <!-- coverage logging (build/logs/junit.xml)                                                  -->
+  <!-- ======================================================================================== -->
+
+  <logging>
+    <log type="junit" target="/dev/null" logIncompleteSkipped="false" />
+  </logging>
 
 </phpunit>

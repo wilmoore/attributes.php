@@ -60,7 +60,7 @@ class IssetTest extends TestCase {
    */
   public function instance_wrapper($data) {
     return array_map(function($parameters){
-      $attributes   = $parameters[2];
+      $attributes   = $parameters[count($parameters)-1];
       $instance     = $this->getObjectForTrait('Meta\Attributes');
       $reflection   = new \ReflectionObject($instance);
       $__attributes = $reflection->getProperty('__attributes');

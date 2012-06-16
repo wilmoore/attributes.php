@@ -1,7 +1,6 @@
 <?php
 
 /**
- * attributes
  * Copyright(c) 2012 Wil Moore III <wil.moore@wilmoore.com>
  * MIT Licensed
  */
