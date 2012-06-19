@@ -67,7 +67,7 @@ Installation (Composer)
 
 **Composer (step II)**
 
-	$ composer.phar install
+	$ composer install
 
 
 Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
