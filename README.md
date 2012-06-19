@@ -56,7 +56,7 @@ Usage Examples
 Download and Installation
 ------------------------------
 
-**Composer**
+**Composer (step I)**
 
 	$ cat > composer.json
     {
@@ -64,6 +64,8 @@ Download and Installation
         "metaphp/attributes": "*"
       }
     }
+
+**Composer (step II)**
 
 	$ composer.phar install
 
