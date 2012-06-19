@@ -1,9 +1,9 @@
 {
 
-  "name":           "wilmoore/props",
+  "name":           "metaphp/attributes",
   "description":    "Provides property accessors for PHP objects; allows input validation/transformation, defaults, change tracking, and JSON serialization of object properties.",
   "keywords":       ["properties", "attributes", "accessor", "validation", "defaults", "changetracking"],
-  "homepage":       "http://wilmoore.github.com/props",
+  "homepage":       "http://metaphp.github.com/attributes",
   "license":        "MIT",
 
   "authors": [
@@ -22,7 +22,7 @@
   },
 
   "autoload": {
-    "psr-0":        { "Meta": "src/main/" }
+    "psr-0":        { "Meta\\Attributes": "src/main/" }
   }
 
 }
