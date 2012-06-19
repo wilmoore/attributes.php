@@ -53,7 +53,7 @@ Usage Examples
 	$person.set('lastName',  'Moore');
 
 
-Download and Installation
+Installation (Composer)
 ------------------------------
 
 **Composer (step I)**
