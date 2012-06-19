@@ -62,7 +62,7 @@ composer.json:
 
 	{
 		"require": {
-			"metaphp/attributes": "dev-master"
+			"metaphp/attributes": "*"
 		}
 	}
 
