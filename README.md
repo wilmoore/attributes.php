@@ -58,15 +58,14 @@ Download and Installation
 
 **Composer**
 
-__composer.json__:
+  cat > composer.json
+  {
+    "require": {
+      "metaphp/attributes": "*"
+    }
+  }
 
-	{
-		"require": {
-			"metaphp/attributes": "*"
-		}
-	}
-
-__install__:
+**install**:
 
 	$ composer.phar install
 
