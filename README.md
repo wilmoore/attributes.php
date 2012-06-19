@@ -65,7 +65,6 @@ Download and Installation
       }
     }
 
-**install**:
 
 	$ composer.phar install
 
