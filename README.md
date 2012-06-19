@@ -59,6 +59,7 @@ Download and Installation
 **Composer**
 
   cat > composer.json
+
   {
     "require": {
       "metaphp/attributes": "*"
