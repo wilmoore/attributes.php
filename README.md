@@ -68,8 +68,9 @@ composer.json:
 
 run composer:
 
-	$ curl -s http://getcomposer.org/installer | php
 	$ composer.phar install
+
+NOTE: Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
 
 
 Alternatives
