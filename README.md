@@ -58,7 +58,7 @@ Download and Installation
 
 **Composer**
 
-composer.json:
+__composer.json__:
 
 	{
 		"require": {
@@ -66,11 +66,12 @@ composer.json:
 		}
 	}
 
-run composer:
+__install__:
 
 	$ composer.phar install
 
-NOTE: Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
+
+Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
 
 
 Alternatives
