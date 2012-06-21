@@ -25,7 +25,21 @@ trait Attributes
   private $__attributes = [];
 
   /**
-   * `has` determins if an attribute "has" been defined
+   * `changed` provides changed attribute history
+   *
+   * @param   string  $attribute  attribute name
+   *
+   * @api     public
+   * @return  array
+   */
+  function changed($attribute) {
+    return $this->propertyExists($attribute, 'changes')
+         ? $this->getPropertyFor($attribute, 'changes')
+         : [];
+  }
+
+  /**
+   * `has` determines if an attribute "has" been defined
    *
    * @param   string  $attribute  attribute name
    *
