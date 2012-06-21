@@ -57,29 +57,48 @@ class ChangedTest extends TestCase {
    * @test
    * @dataProvider provider_attributes_configuration
    */
-  function Has_Changed_Attribute_Is_Array($expected, $attribute, $config, $instance) {
+  function Change_History_Is_Array($expected, $attribute, $config, $instance) {
 		$instance->set($attribute, $expected);
     $this->assertInternalType('array', $instance->changed($attribute));
   }
 
   /**
    * @test
-   * @depends Has_Changed_Attribute_Is_Array
+   * @depends Change_History_Is_Array
    * @dataProvider provider_attributes_configuration
    */
-  function Has_Changed_Attribute_Not_Empty($expected, $attribute, $config, $instance) {
+  function Change_History_Is_Not_Empty($expected, $attribute, $config, $instance) {
 		$instance->set($attribute, $expected);
     $this->assertNotEmpty($instance->changed($attribute));
   }
 
   /**
    * @test
-   * @depends Has_Changed_Attribute_Not_Empty
+   * @depends Change_History_Is_Not_Empty
    * @dataProvider provider_attributes_configuration
    */
-  function Has_Changed_Attribute_Count($expected, $attribute, $config, $instance) {
+  function Change_History_Count_Is_One($expected, $attribute, $config, $instance) {
 		$instance->set($attribute, $expected);
     $this->assertCount(1, $instance->changed($attribute));
+  }
+
+  /**
+   * @test
+   * @depends Change_History_Is_Array
+   * @dataProvider provider_attributes_configuration
+   */
+  function Change_History_As_Boolean_True($expected, $attribute, $config, $instance) {
+		$instance->set($attribute, $expected);
+    $this->assertTrue((boolean) $instance->changed($attribute));
+  }
+
+  /**
+   * @test
+   * @depends Change_History_Is_Array
+   * @dataProvider provider_attributes_configuration
+   */
+  function Change_History_As_Boolean_False($expected, $attribute, $config, $instance) {
+    $this->assertFalse((boolean) $instance->changed($attribute));
   }
 
 }
