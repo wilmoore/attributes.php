@@ -6,7 +6,7 @@
  */
 
 namespace Meta;
-      use DateTime, DateTimezone;
+      use DateTime, DateTimezone, InvalidArgumentException;
 
 /** a light-weight alternative to "Bean"-like getter, setters. */
 trait Attributes
@@ -25,6 +25,16 @@ trait Attributes
   private $__attributes = [];
 
   /**
+   * `__clone` resets change history for cloned instances
+   *
+   * @api     public
+   * @return  array
+   */
+  function __clone() {
+    foreach (array_keys($this->__attributes) as $attribute) { $this->resetChangeHistory($attribute); }
+  }
+
+  /**
    * `changed` provides changed attribute history
    *
    * @param   string  $attribute  attribute name
@@ -36,6 +46,21 @@ trait Attributes
     return $this->propertyExists($attribute, 'changes')
          ? $this->getPropertyFor($attribute, 'changes')
          : [];
+  }
+
+  /**
+   * `resetChangeHistory` clears the change history for an attribute
+   *
+   * @param   string  $attribute  attribute name
+   *
+   * @return  $this
+   */
+  function resetChangeHistory($attribute) {
+    if ($this->propertyExists($attribute, 'changes')) {
+        $this->setPropertyFor($attribute, 'changes', [], null, false);
+    }
+
+    return $this;
   }
 
   /**
@@ -75,8 +100,8 @@ trait Attributes
    * @return  boolean
    */
   function __isset($attribute) {
-    return $this->propertyExists($attribute,  'value')
-        && $this->getPropertyFor($attribute,  'value') !== null;
+    return $this->propertyExists($attribute, 'value')
+        && $this->getPropertyFor($attribute, 'value') !== null;
   }
 
   /**
@@ -106,8 +131,8 @@ trait Attributes
    *
    * @return  mixed
    */
-  function __get($name) {
-    return $this->get($name);
+  function __get($attribute) {
+    return $this->get($attribute);
   }
 
   /**
@@ -118,8 +143,69 @@ trait Attributes
    *
    * @return  $this
    */
-  function set($attribute, $value) {
-    $this->setPropertyFor($attribute, 'value', $value, 'set');
+  function set($attribute, $value = null) {
+    $attributes = is_array($attribute)
+                ? $attribute
+                : [$attribute => $value];
+
+    foreach ($attributes as $attr => $val) {
+
+      // refactor this into a separate method as this could get unwieldy
+      if ($this->getPropertyFor($attr, 'accepts')) {
+        $accepts = $this->getPropertyFor($attr, 'accepts');
+
+        // array list
+        if ( is_array($accepts) ) {
+          if (! in_array($val, $accepts, true)) {
+            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+          }
+        }
+
+        // numeric range
+        if (is_string($accepts) && preg_match('/^(?P<start>\d+)[.][.](?P<limit>\d+)$/', $accepts, $matches)) {
+          if (! in_array($val, range($matches['start'], $matches['limit'], 1), true)) {
+            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+          }
+        }
+
+        // numeric range
+        if (is_string($accepts) && !preg_match("/{$accepts}/u", $val)) {
+            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+        }
+
+        // static class constant
+        // class contant prefix
+      }
+      // refactor this into a separate method as this could get unwieldy
+
+      $this->setPropertyFor($attr, 'value', $val, 'set');
+    }
+
+    return $this;
+  }
+
+  /**
+   * `push` a new value onto end of array
+   *
+   * @param   string  $attribute  attribute name
+   * @param   mixed   $value      attribute value
+   *
+   * @return  $this
+   */
+   function push($attribute, $value) {
+    if (! $this->has($attribute)) {
+      return $this;
+    }
+
+    $new   = $this->get($attribute);
+
+    if (! is_array($new) && !$new instanceof Traversable) {
+      return $this;
+    }
+
+    $new[] = $value;
+    $this->setPropertyFor($attribute, 'value', $new, 'push');
+
     return $this;
   }
 
@@ -131,8 +217,8 @@ trait Attributes
    *
    * @return  $this->set()
    */
-  function __set($name, $value) {
-    return $this->set($name, $value);
+  function __set($attribute, $value) {
+    return $this->set($attribute, $value);
   }
 
   /**
@@ -170,17 +256,19 @@ trait Attributes
    *
    * @return  boolean
    */
-  private function setPropertyFor($attribute, $property, $value, $action) {
+  private function setPropertyFor($attribute, $property, $value, $action, $changeTracking = true) {
     if (! $this->has($attribute)) {return;}
 
-    $this->__attributes[$attribute]['changes'][] = [
-      'action' => $action,
-      'from'   => $this->get($attribute),
-      'to'     => $value,
-      'when'   => $this->now()
-    ];
+    if ($changeTracking) {
+      $this->__attributes[$attribute]['changes'][] = [
+        'action' => $action,
+        'from'   => $this->get($attribute),
+        'to'     => $value,
+        'when'   => $this->now()
+      ];
+    }
 
-    $this->__attributes[$attribute][$property]   = $value;
+    $this->__attributes[$attribute][$property]     = $value;
   }
 
   /**

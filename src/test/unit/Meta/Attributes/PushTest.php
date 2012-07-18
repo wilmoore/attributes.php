@@ -9,7 +9,7 @@ namespace Test\Unit\Meta\Attributes;
       use PHPUnit_Framework_TestCase as TestCase;
       use Meta\Attributes;
 
-class PropertySetTest extends TestCase {
+class PushTest extends TestCase {
 
   /**
    * Attribute Configuration - data provider (isset)
@@ -21,11 +21,9 @@ class PropertySetTest extends TestCase {
    *
    * @return  array
    */
-  public function provider_attributes_configuration() {
-    $data[] = [ false, 'email', 'value', [] ];
-    $data[] = [ false, 'email', 'value', ['email' => []] ];
-    $data[] = [ true,  'email', 'value', ['email' => ['value' => '']] ];
-    $data[] = [ true,  'email', 'value', ['email' => ['value' => 'metaphp@example.com']] ];
+  public function provider_attributes_lists() {
+    $data[] = [ 'name@example.com',  'recipients', ['recipients' => [ 'value' => []]] ];
+    $data[] = [ 2007,                'years',      ['years'      => [ 'value' => [1999, 2000, 2001]]] ];
 
     return $this->instance_wrapper($data);
   }
@@ -36,6 +34,7 @@ class PropertySetTest extends TestCase {
    * adds an object instance to each incoming hash
    *
    * @param   array   attribute data provider configuration
+   *
    * @return  array
    */
   public function instance_wrapper($data) {
@@ -54,10 +53,15 @@ class PropertySetTest extends TestCase {
 
   /**
    * @test
-   * @dataProvider provider_attributes_configuration
+   * @dataProvider provider_attributes_lists
    */
-  public function Expected_Attribute_Isset($expected, $attribute, $property, $config, $instance) {
-    $this->assertSame($expected, $instance->propertyExists($attribute, $property));
+  public function Pushed_Value_Into_Array_Attributes($expected, $attribute, $config, $instance) {
+    $instance->push($attribute, $expected);
+
+    $value  = $instance->get($attribute);
+    $actual = array_pop($value);
+
+    $this->assertEquals($expected, $actual);
   }
 
 }

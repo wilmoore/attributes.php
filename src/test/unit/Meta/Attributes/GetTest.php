@@ -22,10 +22,10 @@ class GetTest extends TestCase {
    * @return  array
    */
   function provider_attributes_configuration() {
-    $data[] = [ null, 							'email', 						'', 							[] ];
-    $data[] = [ 'd@example.com', 		'email', 						'd@example.com', 	['email' => []] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => 'm@example.com']] ];
-    $data[] = [ ['John', 'Doe'], 		['first', 'last'], 	null, 						['first' => ['value' => 'John'], 'last' => ['value' => 'Doe']] ];
+    $data[] = [ null,        'email',       '',        [] ];
+    $data[] = [ 'd@example.com',   'email',       'd@example.com',  ['email' => []] ];
+    $data[] = [ 'm@example.com',   'email',       '',        ['email' => ['value' => 'm@example.com']] ];
+    $data[] = [ ['John', 'Doe'],   ['first', 'last'],  null,       ['first' => ['value' => 'John'], 'last' => ['value' => 'Doe']] ];
 
     return $this->instance_wrapper($data);
   }
@@ -41,35 +41,12 @@ class GetTest extends TestCase {
    * @return  array
    */
   function provider_attributes_configuration_with_types() {
-    $data[] = [ true, 	'employed', 		['employed' => ['type' => 'boolean']] ];
-    $data[] = [ false, 	'married', 			['married' 	=> ['type' => 'boolean']] ];
+    $data[] = [ true,   'employed', ['employed' => ['type' => 'boolean']] ];
+    $data[] = [ false,  'married',  ['married'  => ['type' => 'boolean']] ];
 
-    $data[] = [ 35, 		'age', 					['age' 			=> ['type' => 'integer']] ];
-    $data[] = [ 3, 			'children', 		['children' => ['type' => 'integer']] ];
-    $data[] = [ 0, 			'pets', 				['pets' 		=> ['type' => 'integer']] ];
-
-		/*
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => 3.50, 'type' => 'float']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => 99.9, 'type' => 'float']] ];
-
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => 'hello', 	'type' => 'string']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => '', 			'type' => 'string']] ];
-
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => [], 				'type' => 'array']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => array(), 		'type' => 'array']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => range(1,5), 'type' => 'array']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => [1,2,3], 		'type' => 'array']] ];
-
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => new stdClass, 'type' => 'object']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => new DateTime, 'type' => 'object']] ];
-
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => null, 'type' => 'null']] ];
-
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => function(){}, 														'type' => 'callable']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => ['DateInterval', 'createFromDateString'], 'type' => 'callable']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => [new DateTime, 'format'], 								'type' => 'callable']] ];
-    $data[] = [ 'm@example.com', 		'email', 						'', 							['email' => ['value' => 'strtotime', 															'type' => 'callable']] ];
-		 */
+    $data[] = [ 35,     'age',      ['age'      => ['type' => 'integer']] ];
+    $data[] = [ 3,      'children', ['children' => ['type' => 'integer']] ];
+    $data[] = [ 0,      'pets',     ['pets'     => ['type' => 'integer']] ];
 
     return $this->instance_wrapper($data);
   }
@@ -109,7 +86,7 @@ class GetTest extends TestCase {
    * @dataProvider provider_attributes_configuration_with_types
    */
   function Sets_Typed_Value($expected, $attribute, $config, $instance) {
-		$instance->set($attribute, $expected);
+  $instance->set($attribute, $expected);
     $this->assertEquals($expected, $instance->get($attribute));
   }
 

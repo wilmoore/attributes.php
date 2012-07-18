@@ -27,7 +27,7 @@ Features
 		a **mutator** method defined:
 
 		$user->firstName = 'Freddy';
-		$user->set('firstName') = 'Freddy';
+		$user->set('firstName', 'Freddy');
 
 - 	optionally define **validation** methods for all, some, or none of your object `attributes`.
 
@@ -43,9 +43,27 @@ Features
 Usage Examples
 ------------------------------
 
+SEE: https://gist.github.com/3027238
+
 	class Person {
 		use Meta\Attributes;
-		protected $__attributes = ['firstName' => [], 'lastName'  => []];
+		protected $__attributes = [
+      'firstName' => [],
+      'lastName'  => [ 'getter' => 'lastName', ],
+      'daysofweek' => [ 'accepts' => ['sun', 'mon', 'tue' ]],
+      'age' => ['accepts' => '1..120'],
+      'firstName' => [],
+      'firstName' => [],
+      'firstName' => [],
+      'firstName' => [],
+      'firstName' => [],
+      'firstName' => [],
+      'firstName' => [],
+    ];
+
+    public lastName() {
+      // some conversion
+    }
 	}
 
 	$person = new Person;
@@ -97,6 +115,25 @@ Contributors
 
 	 authors: 
 			 9	Wil Moore III           100.0%
+
+
+Contributors Guide
+------------------------------
+
+Unit Test Style Method Names
+
+- Data Provider Methods
+
+    // Because we want to be clear that this is distinctly a data provider
+    function provider_description_of_provider() {}
+
+- Test Methods
+
+    /**
+     * Because this is easy to read and it produces what you'd expect when you use `--testdox`
+     * @test
+     */
+    function Sentance_Friendly_Description() {}
 
 
 LICENSE
