@@ -174,6 +174,7 @@ Contributors Guide
 Changelog
 ------------------------------
 
+-   (0.0.2) 20120726: Added Travis Integration.
 -   (0.0.1) 20120726: Initial Usable Release.
 
 
