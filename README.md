@@ -1,43 +1,29 @@
 PHP object attributes without the setter, getter boilerplate
 ============================================================
 
-Because...
+It is easy to overlook the fact that to write non-trivial PHP applications, developers end up accepting a lot of cruft and ceremony in their code for the greater good; however, with PHP 5.4, this doesn't have to be the case. Using `Meta\attributes`, you gain a bit of conciseness while still writing maintainable and testable code. While `Meta\attributes` does require you to define your attributes, the definition language is much more concise than defining `protected $property = ...` and `public function setProperty(){}` and `public function getProperty(){}`. That's helpful, but that's not all...you will start to see a significant reduction in boilerplate code when you start to use the `accept` syntax which will throw out unaccetable values. This mitigates the need to wrap your methods with `try {} catch(e) {}`.
+
+
+Rationale
 ------------------------------
 
-- 	You shouldn't (by default) write or generate setter/getter method boilerplate.
-- 	PHP shouldn't borrow the [Bean](http://youtu.be/LH75sJAR0hc) pattern from Java.
-- 	You shouldn't _have_ rely on your [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words)
-		(no matter how good it is) for simple `attribute` **access** and **mutation**.
-- 	Magic method (`__get`, `__set`) copy + paste is a kludge.
-- 	The common base object pattern is a kludge.
+-   PHP lacks intrinsic property get/set syntax; to compensate, we ceremoniously add setter/getter methods even when not needed.
+- 	Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
+- 	Using a common base object to handle object attributes is not a good solution to the underlying problem.
+-   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce the setter/getter cruft is not a good solution to the underlying problem.
+- 	Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
 
 
 Features
 ------------------------------
 
--   no need to write or generate `getter` or `setter` methods unless needed.
-
--   **get** `attribute` values as depicted below with or without having
-		an **accessor** method defined:
-
-		echo $user->firstName;
-		echo $user->get('firstName');
-
--   **set** `attribute` values as depicted below with or without having
-		a **mutator** method defined:
-
-		$user->firstName = 'Freddy';
-		$user->set('firstName', 'Freddy');
-
-- 	optionally define **validation** methods for all, some, or none of your object `attributes`.
-
-- 	optionally define **acceptable** values for any `attribute`
-
-- 	optionally receive a default value when an `attribute` would return null.
-
-- 	retrieve a JSON representation of your object instance.
-
-- 	`isset`, `empty`, and `unset` work as you'd expect them to.
+-   Omit `getter`, `setter` methods until needed.
+-   Access object `attributes` as `$object->firstName` or `$object->get('firstName')`; no getter method needed.
+-   Set values of object `attributes` as `$object->firstName = 'My Name'` or `$object->set('firstName', 'My Name')`; no setter method needed.
+- 	JSON or Array representation of object attributes.
+- 	Expect `isset`, `empty`, and `unset` to work predictably.
+- 	[OPTIONAL] Define **acceptable** values for any `attribute`.
+- 	[OPTIONAL] Define default `attribute` values.
 
 
 Usage Examples
@@ -45,30 +31,23 @@ Usage Examples
 
 SEE: https://gist.github.com/3027238
 
-	class Person {
+	class Game {
 		use Meta\Attributes;
 		protected $__attributes = [
-      'firstName' => [],
-      'lastName'  => [ 'getter' => 'lastName', ],
-      'daysofweek' => [ 'accepts' => ['sun', 'mon', 'tue' ]],
-      'age' => ['accepts' => '1..120'],
-      'firstName' => [],
-      'firstName' => [],
-      'firstName' => [],
-      'firstName' => [],
-      'firstName' => [],
-      'firstName' => [],
-      'firstName' => [],
+      'gameName'  => [],
+      'userName'  => [],
+      'score'     => ['accepts' => '0..100']
     ];
-
-    public lastName() {
-      // some conversion
-    }
 	}
 
-	$person = new Person;
-	$person.set('firstName', 'Senae');
-	$person.set('lastName',  'Moore');
+	$game = new Game;
+  $game->set([
+    'gameName' => 'pacman',
+    'userName' => 'manny.pacquiao'
+    'score'    => 95;
+  ]);
+
+  assert(95 === $game->score);
 
 
 Installation (Composer)
@@ -113,8 +92,12 @@ Contributors
 
 [contributor](https://github.com/metaphp/attributes/contributors) info:
 
-	 authors: 
-			 9	Wil Moore III           100.0%
+   project: attributes
+   commits: 33
+   active : 5 days
+   files  : 14
+   authors: 
+      33	Wil Moore III           100.0%
 
 
 Contributors Guide
@@ -130,7 +113,7 @@ Unit Test Style Method Names
 - Test Methods
 
     /**
-     * Because this is easy to read and it produces what you'd expect when you use `--testdox`
+     * Because this is easy to read and it produces what you'd expect when you run `phpunit --testdox`
      * @test
      */
     function Sentance_Friendly_Description() {}

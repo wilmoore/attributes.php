@@ -1,29 +1,14 @@
 {
 
   "name":           "metaphp/attributes",
-  "description":    "Provides property accessors for PHP objects; allows input validation/transformation, defaults, change tracking, and JSON serialization of object properties.",
-  "keywords":       ["properties", "attributes", "accessor", "validation", "defaults", "changetracking"],
-  "homepage":       "http://metaphp.github.com/attributes",
+  "type":           "library",
+  "description":    "Light-weight; yet flexible PHP attributes without the setter, getter boilerplate.",
+  "keywords":       ["properties", "attributes", "accessor", "mutator", "validation", "defaults", "changetracking", "events", "json", "serialization"],
+  "homepage":       "https://github.com/metaphp/attributes",
   "license":        "MIT",
-
-  "authors": [
-    {
-      "name":       "Wil Moore III",
-      "email":      "wil.moore@wilmoore.com"
-    }
-  ],
-
-  "require": {
-    "php":          ">=5.4.0"
-  },
-
-  "require-dev": {
-    "eher/phpunit": ">=1.6"
-  },
-
-  "autoload": {
-    "psr-0":        { "Meta\\Attributes": "src/main/" }
-  }
+  "authors":        [ { "name": "Wil Moore III", "email": "wil.moore@wilmoore.com", "homepage": "http://wilmoore.com", "role": "Maintainer" } ],
+  "require":        { "php": ">=5.4.0" },
+  "require-dev":    { "eher/phpunit": ">=1.6" },
+  "autoload":       { "psr-0": { "Meta\\Attributes": "src/main" } }
 
 }
-
