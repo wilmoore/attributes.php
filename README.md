@@ -40,13 +40,42 @@ Features
 ------------------------------
 
 -   Omit `getter`, `setter` methods until needed.
--   Access object `attributes` as `$object->firstName` or `$object->get('firstName')`; no getter method needed.
--   Set values of object `attributes` as `$object->firstName = 'My Name'` or `$object->set('firstName', 'My Name')`; no setter method needed.
+
+-   Access `attributes` as (**no getter method needed**):
+
+        $object->firstName;
+
+        // optionally use this instead
+        $object->get('firstName')`;
+
+-   Set `attributes` values as (**no setter method needed**):
+
+        $object->firstName = 'My Name';
+
+        // optionally use this instead
+        $object->set('firstName', 'My Name')`;
+
 - 	JSON or Array representation of object attributes.
+
 - 	Expect `isset`, `empty`, and `unset` to work predictably.
+
+        assert(true  === isset($object->firstName));
+        assert(false === empty($object->firstName));
+        unset($object->firstName);
+        assert(false === isset($object->firstName));
+
 - 	[OPTIONAL] Define **acceptable** values for any `attribute`.
+
+        protected $__attributes = [
+          'second' => ['accepts' => '0..59']
+        ];
+   
 - 	[OPTIONAL] Define default `attribute` values.
 
+        protected $__attributes = [
+          'score' => ['default' => 0]
+        ];
+ 
 
 Usage Examples
 ------------------------------
