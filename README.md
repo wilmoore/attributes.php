@@ -16,10 +16,7 @@ That's not all...you will start to see a significant code reduction when using f
     protected $days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
     public function setDay($type) {
-      // canonical validation looks something like:
-      // in_array?
-      // if not, throw exception
-      // otherwise, set instance variable
+      // canonical validation: in_array? if not, throw exception, otherwise, set instance variable
       // not to mention docblocks and if you are the inline commenting type factor those in as well.
     }
 
