@@ -1,8 +1,10 @@
 language: php
 
-before_script:
-  - curl -s http://getcomposer.org/composer.phar -o composer.phar
-  - php composer.phar install --dev
-
 php:
   - 5.4
+
+before_script:
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install --dev
+
+script: make test-coverage

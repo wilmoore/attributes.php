@@ -122,6 +122,19 @@ Installation (Composer)
 Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
 
 
+Requirements
+------------------------------
+
+-   PHP 5.4+
+-   [optional] PHPUnit 3.6+ to execute the test suite (phpunit --version)
+
+
+Submitting bugs and feature requests
+------------------------------
+
+Bugs and feature request are [tracked on GitHub](https://github.com/Seldaek/jsonlint/issues)
+
+
 Alternatives
 ------------------------------
 
