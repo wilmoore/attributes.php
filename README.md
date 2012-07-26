@@ -11,13 +11,23 @@ Non-trivial PHP applications tend to accumulate cruft and ceremony becomes the n
     public function setProperty(){}
     public function getProperty(){}
 
-That's not all...you will start to see a significant reduction in boilerplate code when you start to use the `accept` syntax which will `throw` out unacceptable values. This mitigates the need to wrap your methods with:
+That's not all...you will start to see a significant code reduction when using functionality such as the `accept` syntax which will `throw` out unacceptable values. This mitigates the need for the following boilerplate:
 
-    protected $types = [ '' => '', '' => '' ];
+    protected $days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
-    public function setType($type) {
-      // canonical type checking here: throw exeception if invalid
+    public function setDay($type) {
+      // canonical validation looks something like:
+      // in_array?
+      // if not, throw exception
+      // otherwise, set instance variable
+      // not to mention docblocks and if you are the inline commenting type factor those in as well.
     }
+
+Allowing for the validation to be defined in place as:
+
+        protected $__attributes = [
+          'type' => ['accepts' => ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']]
+        ];
 
 Not to mention, PHP doesn't allow the following definition:
 
@@ -34,14 +44,16 @@ Rationale
 -   PHP lacks intrinsic property get/set syntax; to compensate, we ceremoniously add setter/getter methods even when not needed.
 - 	Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
 - 	Using a common base object to handle object attributes is not a good solution to the underlying problem.
--   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce the setter/getter cruft is not a good solution to the underlying problem.
+-   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce setter/getter cruft is not a good solution to the underlying problem.
 - 	Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
 
 
 Features
 ------------------------------
 
--   Omit `getter`, `setter` methods until needed.
+-   Omit **setter/getter** methods until needed.
+
+- 	JSON or Array representation of object attributes.
 
 -   Access `attributes` as (**no getter method needed**):
 
@@ -57,8 +69,6 @@ Features
         // optionally use this instead
         $object->set('firstName', 'My Name')`;
 
-- 	JSON or Array representation of object attributes.
-
 - 	Expect `isset`, `empty`, and `unset` to work predictably.
 
         assert(true  === isset($object->firstName));
@@ -66,13 +76,13 @@ Features
         unset($object->firstName);
         assert(false === isset($object->firstName));
 
-- 	[OPTIONAL] Define **acceptable** values for any `attribute`.
+- 	Define **acceptable** values for any `attribute`.
 
         protected $__attributes = [
           'second' => ['accepts' => '0..59']
         ];
    
-- 	[OPTIONAL] Define default `attribute` values.
+- 	Define **default** `attribute` values.
 
         protected $__attributes = [
           'score' => ['default' => 0]
