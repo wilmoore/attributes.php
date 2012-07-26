@@ -17,11 +17,11 @@ That's not all...you will start to see a significant reduction in boilerplate co
       // canonical type checking here: throw exeception if invalid
     }
 
-Not to mention, PHP doesn't even allow the following definition:
+Not to mention, PHP doesn't allow the following definition:
 
     protected $range = range(0, 100);
 
-Also, with intrinsic PHP, gaining access to default property values requires lots of boilerplate code (usually copied and pasted) as well as [reflection-based meta-programming](http://php.net/reflectionclass.getdefaultproperties).
+Finally, gaining access to default property values requires boilerplate code (usually copied and pasted) as well as [reflection-based meta-programming](http://php.net/reflectionclass.getdefaultproperties).
 
 
 Rationale
