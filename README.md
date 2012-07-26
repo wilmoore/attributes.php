@@ -1,11 +1,31 @@
 PHP object attributes without the setter, getter boilerplate
 ============================================================
 
-It is easy to overlook the fact that to write non-trivial PHP applications, developers end up accepting a lot of cruft and ceremony in their code for the greater good; however, with PHP 5.4, this doesn't have to be the case. Using `Meta\attributes`, you gain a bit of conciseness while still writing maintainable and testable code. While `Meta\attributes` does require you to define your attributes, the definition language is much more concise than defining `protected $property = ...` and `public function setProperty(){}` and `public function getProperty(){}`. That's helpful, but that's not all...you will start to see a significant reduction in boilerplate code when you start to use the `accept` syntax which will throw out unaccetable values. This mitigates the need to wrap your methods with `try {} catch(e) {}`.
+Non-trivial PHP applications tend to accumulate cruft and ceremony becomes the norm; however, with PHP 5.4 and `Meta\attributes`, this doesn't have to be the case. Win back a bit of conciseness and still turn-out maintainable and testable code.
+
+`Meta\attributes` does require you to define attributes; however, the definition syntax is much lighter typing the following for every property:
+
+    protected $property = ...
+    public function setProperty(){}
+    public function getProperty(){}
+
+That's not all...you will start to see a significant reduction in boilerplate code when you start to use the `accept` syntax which will `throw` out unacceptable values. This mitigates the need to wrap your methods with:
+
+    protected $types = [ '' => '', '' => '' ];
+
+    public function setType($type) {
+      // canonical type checking here: throw exeception if invalid
+    }
+
+Not to mention, PHP doesn't even allow the following definition:
+
+    protected $range = range(0, 100);
 
 
 Rationale
 ------------------------------
+
+**In case you need further rhetoric (i.e. evidence)**:
 
 -   PHP lacks intrinsic property get/set syntax; to compensate, we ceremoniously add setter/getter methods even when not needed.
 - 	Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
@@ -31,24 +51,24 @@ Usage Examples
 
 SEE: https://gist.github.com/3027238
 
-  class Game {
-    use Meta\Attributes;
+    class Game {
+      use Meta\Attributes;
+      
+      protected $__attributes = [
+        'gameName'  => [],
+        'userName'  => [],
+        'score'     => ['accepts' => '0..100']
+      ];
+    }
+    
+    $game = new Game;
+    $game->set([
+      'gameName' => 'pacman',
+      'userName' => 'manny.pacquiao'
+      'score'    => 95;
+    ]);
 
-    protected $__attributes = [
-      'gameName'  => [],
-      'userName'  => [],
-      'score'     => ['accepts' => '0..100']
-    ];
-  }
-
-	$game = new Game;
-  $game->set([
-    'gameName' => 'pacman',
-    'userName' => 'manny.pacquiao'
-    'score'    => 95;
-  ]);
-
-  assert(95 === $game->score);
+    assert(95 === $game->score);
 
 
 Installation (Composer)
@@ -93,31 +113,31 @@ Contributors
 
 [contributor](https://github.com/metaphp/attributes/contributors) info:
 
-   project: attributes
-   commits: 33
-   active : 5 days
-   files  : 14
-   authors: 
+    project: attributes
+    commits: 33
+    active : 5 days
+    files  : 14
+    authors: 
       33	Wil Moore III           100.0%
 
 
 Contributors Guide
 ------------------------------
 
-Unit Test Style Method Names
+**Unit Test Style Method Names**
 
 -   Data Provider Methods
 
-    // Because we want to be clear that this is distinctly a data provider
-    function provider_description_of_provider() {}
+        // Because we want to be clear that this is distinctly a data provider
+        function provider_description_of_provider() {}
 
 -   Test Methods
 
-    /**
-     * Because this is easy to read and it produces what you'd expect when you run `phpunit --testdox`
-     * @test
-     */
-    function Sentance_Friendly_Description() {}
+        /**
+         * Because this is easy to read and it produces what you'd expect when you run `phpunit --testdox`
+         * @test
+         */
+        function Sentance_Friendly_Description() {}
 
 
 Changelog
