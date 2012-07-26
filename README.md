@@ -31,14 +31,15 @@ Usage Examples
 
 SEE: https://gist.github.com/3027238
 
-	class Game {
-		use Meta\Attributes;
-		protected $__attributes = [
+  class Game {
+    use Meta\Attributes;
+
+    protected $__attributes = [
       'gameName'  => [],
       'userName'  => [],
       'score'     => ['accepts' => '0..100']
     ];
-	}
+  }
 
 	$game = new Game;
   $game->set([
