@@ -5,7 +5,7 @@ Non-trivial PHP applications tend to accumulate cruft and ceremony becomes the n
 
 `Meta\attributes` does require you to define attributes; however, the definition syntax is much lighter than typing the following for every property:
 
-    protected $property = ...
+    protected $property = null;
     public function setProperty(){}
     public function getProperty(){}
 
@@ -20,6 +20,8 @@ That's not all...you will start to see a significant reduction in boilerplate co
 Not to mention, PHP doesn't even allow the following definition:
 
     protected $range = range(0, 100);
+
+Also, with intrinsic PHP, gaining access to default property values requires lots of boilerplate code (usually copied and pasted) as well as [reflection-based meta-programming](http://php.net/reflectionclass.getdefaultproperties).
 
 
 Rationale
