@@ -105,18 +105,24 @@ Contributors Guide
 
 Unit Test Style Method Names
 
-- Data Provider Methods
+-   Data Provider Methods
 
     // Because we want to be clear that this is distinctly a data provider
     function provider_description_of_provider() {}
 
-- Test Methods
+-   Test Methods
 
     /**
      * Because this is easy to read and it produces what you'd expect when you run `phpunit --testdox`
      * @test
      */
     function Sentance_Friendly_Description() {}
+
+
+Changelog
+------------------------------
+
+-   (0.0.1) 20120726: Initial Usable Release.
 
 
 LICENSE
