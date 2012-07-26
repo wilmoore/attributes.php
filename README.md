@@ -1,6 +1,8 @@
 PHP object attributes without the setter, getter boilerplate
 ============================================================
 
+[![Build Status](https://secure.travis-ci.org/metaphp/attributes.png?branch=master)](http://travis-ci.org/metaphp/attributes)
+
 Non-trivial PHP applications tend to accumulate cruft and ceremony becomes the norm; however, with PHP 5.4 and `Meta\attributes`, this doesn't have to be the case. Win back a bit of conciseness and still turn-out maintainable/testable code.
 
 `Meta\attributes` does require you to define attributes; however, the definition syntax is much lighter than typing the following for every property:
