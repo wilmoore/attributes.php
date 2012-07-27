@@ -3,21 +3,29 @@ PHP object attributes without the setter, getter boilerplate
 
 [![Build Status](https://secure.travis-ci.org/metaphp/attributes.png?branch=master)](http://travis-ci.org/metaphp/attributes)
 
-Non-trivial PHP applications tend to accumulate cruft and ceremony becomes the norm; however, with PHP 5.4 and `Meta\attributes`, this doesn't have to be the case. Win back a bit of conciseness and still turn-out maintainable/testable code.
+For non-trivial PHP applications, ceremony and cruft accumulation can be difficult to mitigate. `Meta\attributes` (**attributes**) eliminates some of the ceremony while still allowing for maintainable/testable code.
 
-`Meta\attributes` does require you to define attributes; however, the definition syntax is much lighter than typing the following for every property:
+**Attributes** does require some definition; however, the syntax is much lighter than typing the following for every property:
 
     protected $property = null;
     public function setProperty(){}
     public function getProperty(){}
 
-That's not all...you will start to see a significant code reduction when using functionality such as the `accept` syntax which will `throw` out unacceptable values. This mitigates the need for the following boilerplate:
+That's not all...you will start to see a significant code reduction when using functionality such as the `accepts` syntax which will `throw` out unacceptable values. This mitigates the need for the following boilerplate:
 
     protected $days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
+    /**
+     * super-detailed docblock
+     */
     public function setDay($type) {
-      // canonical validation: in_array? if not, throw exception, otherwise, set instance variable
-      // not to mention docblocks and if you are the inline commenting type factor those in as well.
+      // canonical validation (not to mention type and/or value coersion):
+
+      is value in_array?
+      YEP:  throw exception
+      NOPE: set property
+
+      return $this; // can't forget about that fluent interface right :)
     }
 
 Allowing for the validation to be defined in place as:
@@ -88,8 +96,6 @@ Features
 
 Usage Examples
 ------------------------------
-
-SEE: https://gist.github.com/3027238
 
     class Game {
       use Meta\Attributes;
