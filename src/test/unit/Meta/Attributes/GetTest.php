@@ -83,10 +83,11 @@ class GetTest extends TestCase {
   }
 
   /**
+   * @test
    * @dataProvider provider_attributes_configuration_with_types
    */
   function Sets_Typed_Value($expected, $attribute, $config, $instance) {
-  $instance->set($attribute, $expected);
+    $instance->set($attribute, $expected);
     $this->assertEquals($expected, $instance->get($attribute));
   }
 
