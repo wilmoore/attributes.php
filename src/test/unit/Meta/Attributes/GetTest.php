@@ -22,10 +22,10 @@ class GetTest extends TestCase {
    * @return  array
    */
   function provider_attributes_configuration() {
-    $data[] = [ null,        'email',       '',        [] ];
-    $data[] = [ 'd@example.com',   'email',       'd@example.com',  ['email' => []] ];
-    $data[] = [ 'm@example.com',   'email',       '',        ['email' => ['value' => 'm@example.com']] ];
-    $data[] = [ ['John', 'Doe'],   ['first', 'last'],  null,       ['first' => ['value' => 'John'], 'last' => ['value' => 'Doe']] ];
+    $data[] = [ null,             'email',            '',               [] ];
+    $data[] = [ 'd@example.com',  'email',            'd@example.com',  ['email' => []] ];
+    $data[] = [ 'm@example.com',  'email',            '',               ['email' => ['value' => 'm@example.com']] ];
+    $data[] = [ ['John', 'Doe'],  ['first', 'last'],  null,             ['first' => ['value' => 'John'], 'last' => ['value' => 'Doe']] ];
 
     return $this->instance_wrapper($data);
   }
