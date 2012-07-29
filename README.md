@@ -19,7 +19,7 @@ That's not all...you will start to see a significant code reduction when using f
      * super-detailed docblock
      */
     public function setDay($type) {
-      // canonical validation (not to mention type and/or value coersion):
+      // canonical validation (not to mention type and/or value coercion):
 
       is value in_array?
       YEP:  throw exception
@@ -47,10 +47,10 @@ Rationale
 **In case you need further rhetoric (i.e. evidence)**:
 
 -   PHP lacks intrinsic property get/set syntax; to compensate, we ceremoniously add setter/getter methods even when not needed.
-- 	Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
-- 	Using a common base object to handle object attributes is not a good solution to the underlying problem.
+-   Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
+-   Using a common base object to handle object attributes is not a good solution to the underlying problem.
 -   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce setter/getter cruft is not a good solution to the underlying problem.
-- 	Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
+-   Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
 
 
 Features
@@ -58,7 +58,7 @@ Features
 
 -   Omit **setter/getter** methods until needed.
 
-- 	JSON or Array representation of object attributes.
+-   JSON or Array representation of object attributes.
 
 -   Access `attributes` as (**no getter method needed**):
 
@@ -74,20 +74,20 @@ Features
         // optionally use this instead
         $object->set('firstName', 'My Name')`;
 
-- 	Expect `isset`, `empty`, and `unset` to work predictably.
+-   Expect `isset`, `empty`, and `unset` to work predictably.
 
         assert(true  === isset($object->firstName));
         assert(false === empty($object->firstName));
         unset($object->firstName);
         assert(false === isset($object->firstName));
 
-- 	Define **acceptable** values for any `attribute`.
+-   Define **acceptable** values for any `attribute`.
 
         protected $__attributes = [
           'second' => ['accepts' => '0..59']
         ];
    
-- 	Define **default** `attribute` values.
+-   Define **default** `attribute` values.
 
         protected $__attributes = [
           'score' => ['default' => 0]
@@ -122,7 +122,7 @@ Installation (Composer)
 
 **Composer (step I)**
 
-	$ cat > composer.json
+  $ cat > composer.json
     {
       "require": {
         "metaphp/attributes": "*"
@@ -131,7 +131,7 @@ Installation (Composer)
 
 **Composer (step II)**
 
-	$ composer install
+  $ composer install
 
 
 Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
@@ -177,13 +177,43 @@ Contributors
     active : 5 days
     files  : 14
     authors: 
-      33	Wil Moore III           100.0%
+      33  Wil Moore III           100.0%
 
 
 Contributors Guide
 ------------------------------
 
-**Unit Test Style Method Names**
+I am happy to accept pull request for new features, improvements, or bug
+fixes as long as the pull request is high quality. If your idea is
+really good but you are unable to provide code, I may indeed write the
+code or take whatever you provide and massage it into shape.
+
+That being said, I can't guarantee 100% thtat every pull request will
+land. Feel free to send me a note via [twitter](http://twitter.com/wilmoore)
+to discuss any potential contributions. Discussion via the issue log is
+fine as well.
+
+**Get started by running the test suite**
+
+-   Fork and clone the project
+
+-   cd attributes
+
+-   make test
+
+**Submitting a feature, improvement, or bug fix**
+
+-   Run the test suite
+
+-   Add tests (refer to the section "**Test Method Naming Convention**")
+
+-   Add the feature, improvement, or bug fix
+
+-   Run the test suite
+
+-   Submit a pull request
+
+**Test Method Naming Convention**
 
 -   Data Provider Methods
 
@@ -209,25 +239,25 @@ Changelog
 LICENSE
 ------------------------------
 
-		(The MIT License)
+    (The MIT License)
 
-		Copyright (c) 2012 Wil Moore III <wil.moore@wilmoore.com>
+    Copyright (c) 2012 Wil Moore III <wil.moore@wilmoore.com>
 
-		Permission is hereby granted, free of charge, to any person obtaining a copy
-		of this software and associated documentation files (the "Software"), to deal
-		in the Software without restriction, including without limitation the rights
-		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-		copies of the Software, and to permit persons to whom the Software is furnished
-		to do so, subject to the following conditions:
-
-		The above copyright notice and this permission notice shall be included in all
-		copies or substantial portions of the Software.
-
-		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-		THE SOFTWARE.
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is furnished
+    to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
 
