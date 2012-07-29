@@ -192,7 +192,7 @@ trait Attributes
    *
    * @return  $this
    */
-   function push($attribute, $value) {
+  function push($attribute, $value) {
     if (! $this->has($attribute)) {
       return $this;
     }
@@ -228,7 +228,7 @@ trait Attributes
    *
    * @return  $this
    */
-   function __unset($attribute) {
+  function __unset($attribute) {
     $this->setPropertyFor($attribute, 'value', null, 'unset');
     return $this;
   }
