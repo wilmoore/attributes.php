@@ -264,20 +264,11 @@ trait Attributes
         'action' => $action,
         'from'   => $this->get($attribute),
         'to'     => $value,
-        'when'   => $this->now()
+        'when'   => new DateTime('now', new DateTimezone('UTC'))
       ];
     }
 
     $this->__attributes[$attribute][$property]     = $value;
-  }
-
-  /**
-   * `now` returns a DateTime object for "now" in the UTC timezone
-   *
-   * @return  DateTime
-   */
-   private function now() {
-    return new DateTime('now', new DateTimezone('UTC'));
   }
 
 }
