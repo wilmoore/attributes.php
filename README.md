@@ -46,7 +46,9 @@ Rationale
 
 **In case you need further rhetoric (i.e. evidence)**:
 
--   PHP lacks intrinsic property get/set syntax; to compensate, we ceremoniously add setter/getter methods even when not needed.
+-   PHP lacks intrinsic property get/set syntax; to compensate, the idiom has been to ceremoniously add setter/getter methods even when not needed.
+-   PHP at some point [may or may not have intrinsic get/set syntax](https://wiki.php.net/rfc/propertygetsetsyntax-as-implemented); if it does the
+    implementation should be based on real-world usage scenarios, which is what I intend for this project to drive.
 -   Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
 -   Using a common base object to handle object attributes is not a good solution to the underlying problem.
 -   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce setter/getter cruft is not a good solution to the underlying problem.
