@@ -185,35 +185,41 @@ Contributors
 Contributors Guide
 ------------------------------
 
-I am happy to accept pull request for new features, improvements, or bug
-fixes as long as the pull request is high quality. If your idea is
-really good but you are unable to provide code, I may indeed write the
-code or take whatever you provide and massage it into shape.
+I am happy to accept pull requests for new features, improvements, or bug fixes
+as long as the pull request is high quality. If your idea is really good but you
+are unable to provide code, I may indeed write the code or take whatever you
+provide and massage it into shape.
 
-That being said, I can't guarantee 100% thtat every pull request will
-land. Feel free to send me a note via [twitter](http://twitter.com/wilmoore)
-to discuss any potential contributions. Discussion via the issue log is
-fine as well.
+That being said, I can't guarantee 100% thtat every pull request will land. Feel
+free to send me a note via [twitter](http://twitter.com/wilmoore) to discuss any
+potential contributions. Discussion via the issue log is fine as well.
 
 **Get started by running the test suite**
 
--   Fork and clone the project
+-   Fork the [official repository](http://github.com/metaphp/attributes).
 
--   cd attributes
+-   Clone your fork:
 
--   make test
+        % git clone git@github.com:${GITHUB_USER}/attributes.git
+
+-   Ensure test are passing:
+
+        % cd attributes
+        % make test
 
 **Submitting a feature, improvement, or bug fix**
 
--   Run the test suite
+-   Create a topic branch:
 
--   Add tests (refer to the section "**Test Method Naming Convention**")
+        % git checkout -b feature-name-or-issue-id
 
--   Add the feature, improvement, or bug fix
+-   Add tests (refer to the section "**Test Method Naming Convention**").
 
--   Run the test suite
+-   Add the feature, improvement, or bug fix.
 
--   Submit a pull request
+-   Run the test suite.
+
+-   Submit a pull request.
 
 **Test Method Naming Convention**
 
