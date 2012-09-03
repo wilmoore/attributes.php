@@ -190,7 +190,7 @@ as long as the pull request is high quality. If your idea is really good but you
 are unable to provide code, I may indeed write the code or take whatever you
 provide and massage it into shape.
 
-That being said, I can't guarantee 100% thtat every pull request will land. Feel
+That being said, I can't guarantee 100% that every pull request will land. Feel
 free to send me a note via [twitter](http://twitter.com/wilmoore) to discuss any
 potential contributions. Discussion via the issue log is fine as well.
 
