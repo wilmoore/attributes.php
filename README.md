@@ -149,7 +149,7 @@ Requirements
 Submitting bugs and feature requests
 ------------------------------
 
-Bugs and feature request are [tracked on GitHub](https://github.com/Seldaek/jsonlint/issues)
+Bugs and feature request are [tracked on GitHub](https://github.com/metaphp/attributes/issues)
 
 
 Alternatives
