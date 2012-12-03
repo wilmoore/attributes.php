@@ -8,7 +8,7 @@
   "license":        "MIT",
   "authors":        [ { "name": "Wil Moore III", "email": "wil.moore@wilmoore.com", "homepage": "http://wilmoore.com", "role": "Maintainer" } ],
   "require":        { "php": ">=5.4.0" },
-  "require-dev":    { "eher/phpunit": ">=1.6" },
+  "require-dev":    { "phpunit/phpunit": "3.7.x-dev" },
   "autoload":       { "psr-0": { "Meta\\Attributes": "src/main" } }
 
 }
