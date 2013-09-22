@@ -99,44 +99,52 @@ Features
 Usage Examples
 ------------------------------
 
-    class Game {
-      use Meta\Attributes;
-      
-      protected $__attributes = [
-        'gameName'  => [],
-        'userName'  => [],
-        'score'     => ['accepts' => '0..100']
-      ];
-    }
-    
-    $game = new Game;
-    $game->set([
-      'gameName' => 'pacman',
-      'userName' => 'manny.pacquiao'
-      'score'    => 95;
-    ]);
+```php
+<?php
 
-    assert(95 === $game->score);
+require 'vendor/autoload.php';
 
+class Game {
+  use Meta\Attributes;
+
+  protected $__attributes = [
+    'gameName'  => [],
+    'userName'  => [],
+    'score'     => ['accepts' => '0..100']
+  ];
+}
+
+$game = new Game;
+$game->set([
+  'gameName' => 'pacman',
+  'userName' => 'manny.pacquiao',
+  'score'    => 95
+]);
+
+assert(95 === $game->score);
+```
 
 Installation (Composer)
 ------------------------------
 
 **Composer (step I)**
 
-  $ cat > composer.json
-    {
-      "require": {
+```bash
+% cat > composer.json <<EOF
+{
+    "require": {
         "metaphp/attributes": "*"
-      }
     }
+}
+EOF
+```
 
 **Composer (step II)**
 
-  $ composer install
-
-
-Follow the [composer Installation instructions](http://getcomposer.org/doc/00-intro.md#installation) if you don't have `composer` installed.
+```bash
+% curl -s http://getcomposer.org/composer.phar -o composer ; chmod +x composer
+% ./composer install
+```
 
 
 Requirements
