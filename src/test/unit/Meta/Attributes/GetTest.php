@@ -6,8 +6,11 @@
  */
 
 namespace Test\Unit\Meta\Attributes;
-      use PHPUnit_Framework_TestCase as TestCase;
-      use Meta\Attributes;
+
+require_once dirname(__DIR__) . '/TestAsset/SimpleEntity.php';
+
+use PHPUnit_Framework_TestCase as TestCase;
+use Test\Unit\Meta\TestAsset\SimpleEntity;
 
 class GetTest extends TestCase {
 
@@ -63,7 +66,7 @@ class GetTest extends TestCase {
   function instance_wrapper($data) {
     return array_map(function($parameters){
       $attributes   = $parameters[count($parameters)-1];
-      $instance     = $this->getObjectForTrait('Meta\Attributes');
+      $instance     = new SimpleEntity();
       $reflection   = new \ReflectionObject($instance);
       $__attributes = $reflection->getProperty('__attributes');
       $__attributes->setAccessible(true);
