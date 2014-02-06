@@ -13,18 +13,6 @@ trait Attributes
 {
 
   /**
-   * @var []
-   *
-   * val
-   * default
-   * accepts
-   * regex
-   * validator
-   * changes
-   */
-  private $__attributes = [];
-
-  /**
    * `__clone` resets change history for cloned instances
    *
    * @api     public
