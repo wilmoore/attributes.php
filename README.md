@@ -1,7 +1,6 @@
-PHP object attributes without the setter, getter boilerplate
-============================================================
+# minimal object attributes for PHP
 
-[![Build Status](https://secure.travis-ci.org/metaphp/attributes.png?branch=master)](http://travis-ci.org/metaphp/attributes)
+[![Build Status](https://secure.travis-ci.org/wilmoore/attributes.php.png?branch=master)](http://travis-ci.org/wilmoore/attributes.php)
 
 For non-trivial PHP applications, ceremony and cruft accumulation can be difficult to mitigate. `Meta\attributes` (**attributes**) eliminates some of the ceremony while still allowing for maintainable/testable code.
 

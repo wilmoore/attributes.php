@@ -1,16 +1,9 @@
 <?php
 
-/**
- * Copyright(c) 2012 Wil Moore III <wil.moore@wilmoore.com>
- * MIT Licensed
- */
-
-namespace Test\Unit\Meta\Attributes;
-
-require_once dirname(__DIR__) . '/TestAsset/SimpleEntity.php';
+namespace Test;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Test\Unit\Meta\TestAsset\SimpleEntity;
+use Test\SimpleEntity;
 
 class GetTest extends TestCase {
 
