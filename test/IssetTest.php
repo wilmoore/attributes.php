@@ -3,9 +3,10 @@
 namespace Test;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Test\SimpleEntity;
 
 class IssetTest extends TestCase {
+
+  use InstanceWrapper;
 
   /**
    * Attribute Configuration - data provider (isset)
@@ -43,29 +44,6 @@ class IssetTest extends TestCase {
     $data[] = [ false, 'email', ['email' => ['value' => 'metaphp@example.com']] ];
 
     return $this->instance_wrapper($data);
-  }
-
-  /**
-   * Object Instance Wrapper
-   *
-   * adds an object instance to each incoming hash
-   *
-   * @param   array   attribute data provider configuration
-   *
-   * @return  array
-   */
-  public function instance_wrapper($data) {
-    return array_map(function($parameters){
-      $attributes   = $parameters[count($parameters)-1];
-      $instance     = new SimpleEntity();
-      $reflection   = new \ReflectionObject($instance);
-      $__attributes = $reflection->getProperty('__attributes');
-      $__attributes->setAccessible(true);
-      $__attributes->setValue($instance, $attributes);
-      $parameters[] = $instance;
-
-      return $parameters;
-    }, $data);
   }
 
   /**
