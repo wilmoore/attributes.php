@@ -1,278 +1,71 @@
-# minimal object attributes for PHP
+# minimal object attributes trait for PHP
 
 [![Build Status](https://secure.travis-ci.org/wilmoore/attributes.php.png?branch=master)](http://travis-ci.org/wilmoore/attributes.php)
 
-For non-trivial PHP applications, ceremony and cruft accumulation can be difficult to mitigate. `Meta\attributes` (**attributes**) eliminates some of the ceremony while still allowing for maintainable/testable code.
+The `Attributes` trait helps to avoid having to manually write getter/setter boilerplate:
 
-**Attributes** does require some definition; however, the syntax is much lighter than typing the following for every property:
-
-    protected $property = null;
-    public function setProperty(){}
-    public function getProperty(){}
-
-That's not all...you will start to see a significant code reduction when using functionality such as the `accepts` syntax which will `throw` out unacceptable values. This mitigates the need for the following boilerplate:
-
-    protected $days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-    /**
-     * super-detailed docblock
-     */
-    public function setDay($type) {
-      // canonical validation (not to mention type and/or value coercion):
-
-      is value in_array?
-      YEP:  throw exception
-      NOPE: set property
-
-      return $this; // can't forget about that fluent interface right :)
-    }
-
-Allowing for the validation to be defined in place as:
-
-        protected $__attributes = [
-          'type' => ['accepts' => ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']]
-        ];
-
-Not to mention, PHP doesn't allow the following definition:
-
-    protected $range = range(0, 100);
-
-Finally, gaining access to default property values requires boilerplate code (usually copied and pasted) as well as [reflection-based meta-programming](http://php.net/reflectionclass.getdefaultproperties).
-
-
-Rationale
-------------------------------
-
-**In case you need further rhetoric (i.e. evidence)**:
-
--   PHP lacks intrinsic property get/set syntax; to compensate, the idiom has been to ceremoniously add setter/getter methods even when not needed.
--   PHP at some point [may or may not have intrinsic get/set syntax](https://wiki.php.net/rfc/propertygetsetsyntax-as-implemented); if it does the
-    implementation should be based on real-world usage scenarios, which is what I intend for this project to drive.
--   Using `__get` and `__set` interceptors to avoid setter/getter cruft is not a good solution to the underlying problem.
--   Using a common base object to handle object attributes is not a good solution to the underlying problem.
--   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce setter/getter cruft is not a good solution to the underlying problem.
--   Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
-
-
-Features
-------------------------------
+## Features
 
 -   Omit **setter/getter** methods until needed.
-
 -   JSON or Array representation of object attributes.
+-   Get values via `$object->firstName` or `$object->get('firstName')`
+-   Set values via `$object->firstName = 'My Name';` or `$object->set('firstName', 'My Name')`
+-   `isset`, `empty`, and `unset` work as expected.
+-   Define _acceptable_ input values like `'seconds' => ['accepts' => '0..59']`
+-   Define _default_ values like `'score' => ['default' => 0]`
 
--   Access `attributes` as (**no getter method needed**):
+## Anti-Features
 
-        $object->firstName;
+-   Leaning on [complex IDEs](http://goo.gl/tUh9j) to produce setter/getter cruft is not a good solution to the underlying problem.
+-   Leaning on an [ORM](http://www.doctrine-project.org/blog/a-doctrine-orm-odm-base-class.html#last-words) is not a good solution since not every object in your domain needs to be persisted.
+-   Leaning on [reflection-based meta-programming](http://php.net/reflectionclass.getdefaultproperties).
 
-        // optionally use this instead
-        $object->get('firstName')`;
+## Examples
 
--   Set `attributes` values as (**no setter method needed**):
+    class Game {
+      use Attributes;
 
-        $object->firstName = 'My Name';
-
-        // optionally use this instead
-        $object->set('firstName', 'My Name')`;
-
--   Expect `isset`, `empty`, and `unset` to work predictably.
-
-        assert(true  === isset($object->firstName));
-        assert(false === empty($object->firstName));
-        unset($object->firstName);
-        assert(false === isset($object->firstName));
-
--   Define **acceptable** values for any `attribute`.
-
-        protected $__attributes = [
-          'second' => ['accepts' => '0..59']
-        ];
-   
--   Define **default** `attribute` values.
-
-        protected $__attributes = [
-          'score' => ['default' => 0]
-        ];
- 
-
-Usage Examples
-------------------------------
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-class Game {
-  use Meta\Attributes;
-
-  protected $__attributes = [
-    'gameName'  => [],
-    'userName'  => [],
-    'score'     => ['accepts' => '0..100']
-  ];
-}
-
-$game = new Game;
-$game->set([
-  'gameName' => 'pacman',
-  'userName' => 'manny.pacquiao',
-  'score'    => 95
-]);
-
-assert(95 === $game->score);
-```
-
-Installation (Composer)
-------------------------------
-
-**Composer (step I)**
-
-```bash
-% cat > composer.json <<EOF
-{
-    "require": {
-        "metaphp/attributes": "*"
+      protected $__attributes = [
+        'gameName'  => [],
+        'userName'  => [],
+        'score'     => ['accepts' => '0..100']
+      ];
     }
-}
-EOF
-```
 
-**Composer (step II)**
+    $game = new Game;
+    $game->set([
+      'gameName' => 'pacman',
+      'userName' => 'manny.pacquiao',
+      'score'    => 95
+    ]);
 
-```bash
-% curl -s http://getcomposer.org/composer.phar -o composer ; chmod +x composer
-% ./composer install
-```
+    assert(95 === $game->score);
 
+## Installation
 
-Requirements
-------------------------------
+### Composer
+
+    "require": {
+        "wilmoore/attributes.php": "*"
+    }
+
+## Requirements
 
 -   PHP 5.4+
 -   [optional] PHPUnit 3.6+ to execute the test suite (phpunit --version)
 
+## Resources
 
-Submitting bugs and feature requests
-------------------------------
+- [Issues](https://github.com/metaphp/attributes/issues)
+- [Contributors](https://github.com/metaphp/attributes/contributors)
+- [Request for Comments: Property Accessors](https://wiki.php.net/rfc/propertygetsetsyntax-as-implemented)
 
-Bugs and feature request are [tracked on GitHub](https://github.com/metaphp/attributes/issues)
+## Changelog
 
+- (0.0.2) 20120726: Added Travis Integration.
+- (0.0.1) 20120726: Initial Usable Release.
 
-Alternatives
-------------------------------
+## LICENSE
 
--   [Ruby](http://ruby-lang.org/)
--   [Scala](http://scala-lang.org/)
-
-
-Inspiration
-------------------------------
-
--   [Virtus](https://github.com/solnic/virtus)
--   [Smart Properties](https://github.com/t6d/smart_properties)
--   [C# Properties](http://msdn.microsoft.com/en-us/library/x9fsa0sw)
--   [BackboneJs Model Attributes](http://backbonejs.org/#Model-attributes)
--   [YUI3: Attribute](http://yuilibrary.com/yui/docs/attribute/index.html)
-
-
-Contributors
-------------------------------
-
-[contributor](https://github.com/metaphp/attributes/contributors) info:
-
-    project: attributes
-    commits: 33
-    active : 5 days
-    files  : 14
-    authors: 
-      33  Wil Moore III           100.0%
-
-
-Contributors Guide
-------------------------------
-
-I am happy to accept pull requests for new features, improvements, or bug fixes
-as long as the pull request is high quality. If your idea is really good but you
-are unable to provide code, I may indeed write the code or take whatever you
-provide and massage it into shape.
-
-That being said, I can't guarantee 100% that every pull request will land. Feel
-free to send me a note via [twitter](http://twitter.com/wilmoore) to discuss any
-potential contributions. Discussion via the issue log is fine as well.
-
-**Get started by running the test suite**
-
--   Fork the [official repository](http://github.com/metaphp/attributes).
-
--   Clone your fork:
-
-        % git clone git@github.com:${GITHUB_USER}/attributes.git
-
--   Ensure test are passing:
-
-        % cd attributes
-        % make test
-
-**Submitting a feature, improvement, or bug fix**
-
--   Create a topic branch:
-
-        % git checkout -b feature-name-or-issue-id
-
--   Add tests (refer to the section "**Test Method Naming Convention**").
-
--   Add the feature, improvement, or bug fix.
-
--   Run the test suite.
-
--   Submit a pull request.
-
-**Test Method Naming Convention**
-
--   Data Provider Methods
-
-        // Because we want to be clear that this is distinctly a data provider
-        function provider_description_of_provider() {}
-
--   Test Methods
-
-        /**
-         * Because this is easy to read and it produces what you'd expect when you run `phpunit --testdox`
-         * @test
-         */
-        function Sentance_Friendly_Description() {}
-
-
-Changelog
-------------------------------
-
--   (0.0.2) 20120726: Added Travis Integration.
--   (0.0.1) 20120726: Initial Usable Release.
-
-
-LICENSE
-------------------------------
-
-    (The MIT License)
-
-    Copyright (c) 2012 Wil Moore III <wil.moore@wilmoore.com>
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is furnished
-    to do so, subject to the following conditions:
-    
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-    
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-    THE SOFTWARE.
+  MIT
 
