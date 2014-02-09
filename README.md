@@ -58,6 +58,7 @@ The `Attributes` trait helps to avoid having to manually write getter/setter boi
 
 - [Issues](https://github.com/metaphp/attributes/issues)
 - [Contributors](https://github.com/metaphp/attributes/contributors)
+- [Contributor Guide](https://github.com/wilmoore/attributes.php/wiki/Contributor-Guide)
 - [Request for Comments: Property Accessors](https://wiki.php.net/rfc/propertygetsetsyntax-as-implemented)
 
 ## Changelog
