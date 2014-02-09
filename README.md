@@ -1,8 +1,8 @@
-# minimal object attributes trait for PHP
+# Attributes Trait for PHP
 
 [![Build Status](https://secure.travis-ci.org/wilmoore/attributes.php.png?branch=master)](http://travis-ci.org/wilmoore/attributes.php)
 
-A minimal `Attributes` trait to decrease getter/setter boilerplate.
+A minimal trait to decrease getter/setter boilerplate.
 
 ## Features
 
