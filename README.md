@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/wilmoore/attributes.php.png?branch=master)](http://travis-ci.org/wilmoore/attributes.php)
 
-The `Attributes` trait helps to avoid having to manually write getter/setter boilerplate:
+A minimal `Attributes` trait to decrease getter/setter boilerplate.
 
 ## Features
 
