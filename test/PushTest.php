@@ -1,21 +1,14 @@
 <?php
 
-/**
- * Copyright(c) 2012 Wil Moore III <wil.moore@wilmoore.com>
- * MIT Licensed
- */
-
-namespace Test\Unit\Meta\Attributes;
-
-require_once dirname(__DIR__) . '/TestAsset/SimpleEntity.php';
+namespace Test;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Test\Unit\Meta\TestAsset\SimpleEntity;
+use Test\SimpleEntity;
 
-class HasTest extends TestCase {
+class PushTest extends TestCase {
 
   /**
-   * Attribute Configuration - data provider
+   * Attribute Configuration - data provider (isset)
    *
    * fields:
    *  - [boolean] expected result
@@ -24,10 +17,9 @@ class HasTest extends TestCase {
    *
    * @return  array
    */
-  public function provider_attributes_configuration() {
-    $data[] = [ false, 'email', [] ];
-    $data[] = [ true,  'email', ['email' => []] ];
-    $data[] = [ true,  'email', ['email' => ['value' => 'metaphp@example.com']] ];
+  public function provider_attributes_lists() {
+    $data[] = [ 'name@example.com',  'recipients', ['recipients' => [ 'value' => []]] ];
+    $data[] = [ 2007,                'years',      ['years'      => [ 'value' => [1999, 2000, 2001]]] ];
 
     return $this->instance_wrapper($data);
   }
@@ -57,10 +49,15 @@ class HasTest extends TestCase {
 
   /**
    * @test
-   * @dataProvider provider_attributes_configuration
+   * @dataProvider provider_attributes_lists
    */
-  public function Has_Expected_Attributes($expected, $attribute, $config, $instance) {
-    $this->assertSame($expected, $instance->has($attribute));
+  public function Pushed_Value_Into_Array_Attributes($expected, $attribute, $config, $instance) {
+    $instance->push($attribute, $expected);
+
+    $value  = $instance->get($attribute);
+    $actual = array_pop($value);
+
+    $this->assertEquals($expected, $actual);
   }
 
 }

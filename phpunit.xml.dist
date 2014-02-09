@@ -2,7 +2,7 @@
 
 <phpunit  backupGlobals="false"
           backupStaticAttributes="false"
-          bootstrap="vendor/autoload.php"
+          bootstrap="vendor/composer/autoload_psr4.php"
           colors="true"
           convertErrorsToExceptions="true"
           convertNoticesToExceptions="true"
@@ -21,10 +21,7 @@
 
   <testsuites>
     <testsuite name="Unit Test Suite">
-      <directory>./src/test/unit/Meta/</directory>
-    </testsuite>
-    <testsuite name="Spec Test Suite">
-      <directory>./src/test/spec/Meta/</directory>
+      <directory>./test/</directory>
     </testsuite>
   </testsuites>
 
@@ -34,7 +31,7 @@
 
   <filter>
     <whitelist addUncoveredFilesFromWhitelist="true">
-      <directory suffix="Test.php">./src/test/unit/Meta</directory>
+      <directory suffix="Test.php">./test</directory>
     </whitelist>
   </filter>
 
@@ -51,7 +48,7 @@
   </groups>
 
   <!-- ======================================================================================== -->
-  <!-- coverage logging (build/logs/junit.xml)                                                  -->
+  <!-- coverage logging                                                                         -->
   <!-- ======================================================================================== -->
 
   <logging>

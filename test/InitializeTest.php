@@ -1,18 +1,11 @@
 <?php
 
-/**
- * Copyright(c) 2012 Wil Moore III <wil.moore@wilmoore.com>
- * MIT Licensed
- */
-
-namespace Test\Unit\Meta\Attributes;
-
-require_once dirname(__DIR__) . '/TestAsset/SimpleEntity.php';
+namespace Test;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Test\Unit\Meta\TestAsset\SimpleEntity;
+use Test\SimpleEntity;
 
-class PushTest extends TestCase {
+class InitializeTest extends TestCase {
 
   /**
    * Attribute Configuration - data provider (isset)
@@ -24,9 +17,11 @@ class PushTest extends TestCase {
    *
    * @return  array
    */
-  public function provider_attributes_lists() {
-    $data[] = [ 'name@example.com',  'recipients', ['recipients' => [ 'value' => []]] ];
-    $data[] = [ 2007,                'years',      ['years'      => [ 'value' => [1999, 2000, 2001]]] ];
+  public function provider_attributes_configuration() {
+    $data[] = [ false, 'email', 'value', [] ];
+    $data[] = [ false, 'email', 'value', ['email' => []] ];
+    $data[] = [ true,  'email', 'value', ['email' => ['value' => '']] ];
+    $data[] = [ true,  'email', 'value', ['email' => ['value' => 'metaphp@example.com']] ];
 
     return $this->instance_wrapper($data);
   }
@@ -37,7 +32,6 @@ class PushTest extends TestCase {
    * adds an object instance to each incoming hash
    *
    * @param   array   attribute data provider configuration
-   *
    * @return  array
    */
   public function instance_wrapper($data) {
@@ -54,17 +48,20 @@ class PushTest extends TestCase {
     }, $data);
   }
 
+  /** @test */
+  public function Initial_Attributes_Hash_Is_Empty() {
+    $instance = new SimpleEntity();
+    $this->assertAttributeEmpty('__attributes', $instance);
+
+    return $instance;
+  }
+
   /**
    * @test
-   * @dataProvider provider_attributes_lists
+   * @dataProvider provider_attributes_configuration
    */
-  public function Pushed_Value_Into_Array_Attributes($expected, $attribute, $config, $instance) {
-    $instance->push($attribute, $expected);
-
-    $value  = $instance->get($attribute);
-    $actual = array_pop($value);
-
-    $this->assertEquals($expected, $actual);
+  public function Expected_Attribute_Isset($expected, $attribute, $property, $config, $instance) {
+    $this->assertSame($expected, $instance->propertyExists($attribute, $property));
   }
 
 }

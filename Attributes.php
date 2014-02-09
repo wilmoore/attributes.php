@@ -1,16 +1,12 @@
 <?php
 
+use DateTime, DateTimezone, InvalidArgumentException;
+
 /**
- * @copyright Copyright(c) 2012 Wil Moore III <wil.moore@wilmoore.com>
- * @license   MIT Licensed
+ * a light-weight alternative to "Bean"-like getter, setters.
  */
 
-namespace Meta;
-      use DateTime, DateTimezone, InvalidArgumentException;
-
-/** a light-weight alternative to "Bean"-like getter, setters. */
-trait Attributes
-{
+trait Attributes {
 
   /**
    * `__clone` resets change history for cloned instances
@@ -18,6 +14,7 @@ trait Attributes
    * @api     public
    * @return  array
    */
+
   function __clone() {
     foreach (array_keys($this->__attributes) as $attribute) { $this->resetChangeHistory($attribute); }
   }
@@ -30,6 +27,7 @@ trait Attributes
    * @api     public
    * @return  array
    */
+
   function changed($attribute) {
     return $this->propertyExists($attribute, 'changes')
          ? $this->getPropertyFor($attribute, 'changes')
@@ -43,6 +41,7 @@ trait Attributes
    *
    * @return  $this
    */
+
   function resetChangeHistory($attribute) {
     if ($this->propertyExists($attribute, 'changes')) {
         $this->setPropertyFor($attribute, 'changes', [], null, false);
@@ -59,6 +58,7 @@ trait Attributes
    * @api     public
    * @return  boolean
    */
+
   function has($attribute) {
     return array_key_exists($attribute, $this->__attributes);
   }
@@ -72,6 +72,7 @@ trait Attributes
    * @api     public
    * @return  boolean
    */
+
   function propertyExists($attribute, $property) {
     return array_key_exists($attribute, $this->__attributes)
         && array_key_exists($property,  $this->__attributes[$attribute]);
@@ -87,6 +88,7 @@ trait Attributes
    *
    * @return  boolean
    */
+
   function __isset($attribute) {
     return $this->propertyExists($attribute, 'value')
         && $this->getPropertyFor($attribute, 'value') !== null;
@@ -100,6 +102,7 @@ trait Attributes
    *
    * @return  mixed
    */
+
   function get($name, $default=null) {
     $map = array_map(function($name) use($default){
       if ($this->__isset($name)) {
@@ -119,6 +122,7 @@ trait Attributes
    *
    * @return  mixed
    */
+
   function __get($attribute) {
     return $this->get($attribute);
   }
@@ -131,6 +135,7 @@ trait Attributes
    *
    * @return  $this
    */
+
   function set($attribute, $value = null) {
     $attributes = is_array($attribute)
                 ? $attribute
@@ -180,6 +185,7 @@ trait Attributes
    *
    * @return  $this
    */
+
   function push($attribute, $value) {
     if (! $this->has($attribute)) {
       return $this;
@@ -205,6 +211,7 @@ trait Attributes
    *
    * @return  $this->set()
    */
+
   function __set($attribute, $value) {
     return $this->set($attribute, $value);
   }
@@ -216,6 +223,7 @@ trait Attributes
    *
    * @return  $this
    */
+
   function __unset($attribute) {
     $this->setPropertyFor($attribute, 'value', null, 'unset');
     return $this;
@@ -229,6 +237,7 @@ trait Attributes
    *
    * @return  boolean
    */
+
   private function getPropertyFor($attribute, $property) {
     return $this->propertyExists($attribute, $property)
          ? $this->__attributes[$attribute][$property]
@@ -244,6 +253,7 @@ trait Attributes
    *
    * @return  boolean
    */
+
   private function setPropertyFor($attribute, $property, $value, $action, $changeTracking = true) {
     if (! $this->has($attribute)) {return;}
 

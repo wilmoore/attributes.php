@@ -1,14 +1,12 @@
 {
-
-  "name":           "metaphp/attributes",
+  "name":           "wilmoore/attributes.php",
   "type":           "library",
-  "description":    "Light-weight; yet flexible PHP attributes without the setter, getter boilerplate.",
+  "description":    "minimal object attributes for PHP.",
   "keywords":       ["properties", "attributes", "accessor", "mutator", "validation", "defaults", "changetracking", "events", "json", "serialization"],
-  "homepage":       "https://github.com/metaphp/attributes",
+  "homepage":       "https://github.com/wilmoore/attributes.php",
   "license":        "MIT",
   "authors":        [ { "name": "Wil Moore III", "email": "wil.moore@wilmoore.com", "homepage": "http://wilmoore.com", "role": "Maintainer" } ],
   "require":        { "php": ">=5.4.0" },
-  "require-dev":    { "phpunit/phpunit": "3.7.x-dev" },
-  "autoload":       { "psr-0": { "Meta\\Attributes": "src/main" } }
-
+  "require-dev":    { "phpunit/phpunit": "*" },
+  "autoload":       { "psr-4": { "Attributes\\": "./", "Test\\": "test/" } }
 }
