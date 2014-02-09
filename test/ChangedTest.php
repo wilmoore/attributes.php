@@ -3,7 +3,7 @@
 namespace Test;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use Test\SimpleEntity as SimpleEntity;
+use Test\SimpleEntity;
 
 class ChangedTest extends TestCase {
 
