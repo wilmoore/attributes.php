@@ -1,7 +1,5 @@
 <?php
 
-use DateTime, DateTimezone, InvalidArgumentException;
-
 /**
  * a light-weight alternative to "Bean"-like getter, setters.
  */
