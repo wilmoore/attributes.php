@@ -2,7 +2,9 @@
 
 namespace Test;
 
+use Metaphp\Attributes;
+
 class SimpleEntity {
-    use \Attributes;
+    use Attributes;
     private $__attributes = [];
 }

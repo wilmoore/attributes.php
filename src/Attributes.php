@@ -1,4 +1,9 @@
 <?php
+namespace Metaphp;
+
+use InvalidArgumentException;
+use DateTime;
+use DateTimeZone;
 
 /**
  * a light-weight alternative to "Bean"-like getter, setters.
@@ -141,33 +146,12 @@ trait Attributes {
 
     foreach ($attributes as $attr => $val) {
 
-      // refactor this into a separate method as this could get unwieldy
       if ($this->getPropertyFor($attr, 'accepts')) {
-        $accepts = $this->getPropertyFor($attr, 'accepts');
-
-        // array list
-        if ( is_array($accepts) ) {
-          if (! in_array($val, $accepts, true)) {
-            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+          $acceptsConstraint = new Attributes\Constraint\Accepts($this->getPropertyFor($attr, 'accepts'));
+          if (!$acceptsConstraint->isValid($val)) {
+              throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
           }
-        }
-
-        // numeric range
-        if (is_string($accepts) && preg_match('/^(?P<start>\d+)[.][.](?P<limit>\d+)$/', $accepts, $matches)) {
-          if (! in_array($val, range($matches['start'], $matches['limit'], 1), true)) {
-            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
-          }
-        }
-
-        // numeric range
-        if (is_string($accepts) && !preg_match("/{$accepts}/u", $val)) {
-            throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
-        }
-
-        // static class constant
-        // class contant prefix
       }
-      // refactor this into a separate method as this could get unwieldy
 
       $this->setPropertyFor($attr, 'value', $val, 'set');
     }
