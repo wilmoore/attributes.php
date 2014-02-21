@@ -8,5 +8,5 @@
   "authors":        [ { "name": "Wil Moore III", "email": "wil.moore@wilmoore.com", "homepage": "http://wilmoore.com", "role": "Maintainer" } ],
   "require":        { "php": ">=5.4.0" },
   "require-dev":    { "phpunit/phpunit": "*" },
-  "autoload":       { "psr-4": { "": "./", "Test\\": "test/" } }
+  "autoload":       { "psr-4": { "Metaphp\\": "./src/", "Test\\": "test/" } }
 }
