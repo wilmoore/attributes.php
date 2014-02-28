@@ -65,4 +65,48 @@ class GetTest extends TestCase {
     $this->assertEquals($expected, $instance->get($attribute));
   }
 
+  /**
+   * Attribute Configuration - data provider
+   *
+   * fields:
+   *  - [boolean] expected result
+   *  - [string]  attribute name
+   *  - [hash]    object instance
+   *
+   * @return  array
+   */
+  function provider_attributes_default() {
+    $data[] = [ 'm@example.com', null, 'email', ['email' => ['default' => 'm@example.com']] ];
+    $data[] = [ 'm@example.com', 'm@md.com', 'email', ['email' => ['default' => 'm@example.com', 'value' => 'm@md.com']] ];
+
+    return $this->instance_wrapper($data);
+  }
+
+  /**
+   * @test
+   * @dataProvider provider_attributes_default
+   * 
+   * @todo I'm not liking how this test is written. Look to improve.
+   */
+  function Returns_Default_Value($default, $initialValue, $attribute, $config, $instance) {
+    // Attribute is set to initial value, or default if initial value is null
+    $this->assertTrue((isset($instance->$attribute) ? ($initialValue === $instance->$attribute) : ($default === $instance->$attribute)));
+
+    $newValue = 'some.new.value';
+
+    // The new value is not the same as the default or initial values
+    $this->assertNotSame($newValue, $default);
+    $this->assertNotSame($newValue, $initialValue);
+
+    // Set and check the new value
+    $instance->set($attribute, $newValue);
+    $this->assertSame($newValue, $instance->get($attribute));
+
+    // Unset and check that new value is no longer set, no value is set, and default is now returned
+    unset($instance->$attribute);
+    $this->assertNotSame($newValue, $instance->get($attribute));
+    $this->assertFalse(isset($instance->$attribute));
+    $this->assertSame($default, $instance->get($attribute));
+  }
+
 }

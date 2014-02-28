@@ -110,6 +110,8 @@ trait Attributes {
     $map = array_map(function($name) use($default){
       if ($this->__isset($name)) {
         return $this->__attributes[$name]['value'];
+      } elseif ($this->propertyExists($name, 'default')) {
+        return $this->__attributes[$name]['default'];
       }
 
       return (null === $default) ? null : $default;
