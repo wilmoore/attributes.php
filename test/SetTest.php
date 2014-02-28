@@ -135,31 +135,4 @@ class SetTest extends TestCase {
     $instance->set($attribute, $expected);
   }
 
-  /**
-   * Attribute Configuration - data provider
-   *
-   * initial attribute values
-   *
-   * fields:
-   *  - [boolean] expected result
-   *  - [string]  attribute name
-   *  - [hash]    attribute configuration
-   *
-   * @return  array
-   */
-  function provider_initial_values() {
-    $data[] = [ 20,  'age',  ['age'  => [ 'value' => 20]] ];
-    $data[] = [ ['an', 'array', 'of', 'strings'],  'arrayProperty',  ['arrayProperty'  => [ 'value' => ['an', 'array', 'of', 'strings']]] ];
-
-    return $this->instance_wrapper($data);
-  }
-
-  /**
-   * @test
-   * @dataProvider provider_initial_values
-   */
-  function Sets_Initial_Values($expected, $attribute, $config, $instance) {
-    $this->assertSame($expected, $instance->$attribute);
-  }
-
 }
