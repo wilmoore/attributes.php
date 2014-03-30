@@ -155,6 +155,20 @@ trait Attributes {
           }
       }
 
+      if ($this->getPropertyFor($attr, 'minimum')) {
+          $minimumConstraint = new Attributes\Constraint\Minimum($this->getPropertyFor($attr, 'minimum'));
+          if (!$minimumConstraint->isValid($val)) {
+              throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+          }
+      }
+
+      if ($this->getPropertyFor($attr, 'maximum')) {
+          $maximumConstraint = new Attributes\Constraint\Maximum($this->getPropertyFor($attr, 'maximum'));
+          if (!$maximumConstraint->isValid($val)) {
+              throw new InvalidArgumentException(__CLASS__ . " does not accept {$val} as value for the property {$attr}");
+          }
+      }
+
       $this->setPropertyFor($attr, 'value', $val, 'set');
     }
 
